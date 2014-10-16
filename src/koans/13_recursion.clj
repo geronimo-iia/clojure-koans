@@ -3,21 +3,61 @@
 
 (defn is-even? [n]
   (if (= n 0)
-    __
-    (___ (is-even? (dec n)))))
+    true
+    (not (is-even? (dec n)))))
 
 (defn is-even-bigint? [n]
   (loop [n   n
          acc true]
     (if (= n 0)
-      __
+      acc
       (recur (dec n) (not acc)))))
 
+;; could be nicer
 (defn recursive-reverse [coll]
-  __)
+ (loop [coll coll result '() n (count coll)]
+     (if (= n 0)
+       result
+       (recur (rest coll)  (cons (first coll) result)  (dec n))
+     )
+ )
+)
+;; from javaiste
+(defn recursive-reverse-javaiste [coll]
+ (loop [coll coll n 0 max (count coll) result '()]
+   (if (= n max)
+       result
+       (recur coll (inc n) max (cons (nth coll n ) result) )
+   )
+ )
+)
 
+;; nicer version
+(defn recursive-reverse [coll]
+  (loop [coll coll
+          reversed '()]
+         (if (empty? coll)
+           reversed
+           (recur (rest coll) (cons (first coll) reversed)))))
+
+;; first and silly version with a problem with machine limits
+;; read http://praneett.blogspot.fr/2014/08/20-easy-ways-of-writing-factorial-in.html fro more detail
 (defn factorial [n]
-  __)
+  (if (= n 1)
+    1
+    (* n (factorial (dec n)))
+    ))
+
+;; better
+(defn factorial [n]
+  (loop [n n res 1]
+    (if (= 0 n)
+       res
+       (recur (dec n) (* n res))
+     )
+   )
+  )
+
 
 (meditations
   "Recursion ends with a base case"
@@ -35,6 +75,11 @@
   "Yet it becomes more difficult the more steps you take"
   (= '(5 4 3 2 1) (recursive-reverse [1 2 3 4 5]))
 
+   "Reversing directions is easy when you have not gone far"
+  (= '(1) (recursive-reverse-javaiste [1]))
+
+  "Yet it becomes more difficult the more steps you take"
+  (= '(5 4 3 2 1) (recursive-reverse-javaiste [1 2 3 4 5]))
   "Simple things may appear simple."
   (= 1 (factorial 1))
 

@@ -12,13 +12,13 @@
   (= (+ 3 4) 7 (+ 2 5))
 
   "Some things may appear different, but be the same"
-  (= true (= 2 2/1))
+  (= true (= 2 2/1 4/2))
 
   "You cannot generally float to heavens of integers"
   (= false (= 2 2.0))
 
   "But a looser equality is also possible"
-  (= true (== 2.0 2))
+  (= true (== 2.0 2 2.0 4/2 2/1))
 
   "Something is not equal to nothing"
   (= true (not (= 1 nil)))
