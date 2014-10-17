@@ -23,6 +23,7 @@
                 recipient
                 "... sorry."
                 )))
+)
 
 (meditations
   "Holding records is meaningful only when the record is worthy of you"
@@ -49,3 +50,4 @@
   "Surely we can implement our own by now"
   (= "You're really the Worst Picture, Final Destination 5... sorry."
      (with-out-str (present (Razzie. "Worst Picture") "Final Destination 5"))))
+
